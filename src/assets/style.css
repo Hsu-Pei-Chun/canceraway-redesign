@@ -10,7 +10,7 @@
   --line: #d3dbd5;
   --ink: #1b2826;
   --ink-2: #4b5b58;
-  --ink-3: #6e7d7a;
+  --ink-3: #56645f;
 
   /* brand */
   --brand: #c4361f;          /* logo red: donate, key actions */
@@ -29,6 +29,10 @@
 
   --alert-bg: #fff4d1;
   --alert-ink: #6b4a00;
+  --ribbon-bg: #1b2826;
+  --ribbon-ink: #ffffff;
+  --ribbon-link: #f4b942;
+  --give-bg: #b3301b;
 
   --f-display: "Huninn", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
   --f-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
@@ -50,6 +54,7 @@
     --brand: #e8573c; --sun: #f4b942; --sun-soft: #2e2716; --teal: #6cc3b8; --teal-soft: #17302d;
     --c1: #f0705a; --c2: #f3a94a; --c3: #6cbf82; --c4: #a691de; --c5: #c2b69c;
     --alert-bg: #2e2716; --alert-ink: #f5d78c;
+    --ribbon-bg: #0b1110; --give-bg: #a62f1b;
     color-scheme: dark;
   }
 }
@@ -59,6 +64,7 @@
   --brand: #e8573c; --sun: #f4b942; --sun-soft: #2e2716; --teal: #6cc3b8; --teal-soft: #17302d;
   --c1: #f0705a; --c2: #f3a94a; --c3: #6cbf82; --c4: #a691de; --c5: #c2b69c;
   --alert-bg: #2e2716; --alert-ink: #f5d78c;
+  --ribbon-bg: #0b1110; --give-bg: #a62f1b;
   color-scheme: dark;
 }
 
@@ -86,9 +92,9 @@ p { margin: 0; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ---------- proposal ribbon ---------- */
-.proposal { background: var(--ink); color: var(--paper); font-size: var(--s-xs); }
+.proposal { background: var(--ribbon-bg); color: var(--ribbon-ink); font-size: var(--s-xs); }
 .proposal .wrap { padding-block: 6px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: space-between; }
-.proposal a { color: var(--sun); }
+.proposal a { color: var(--ribbon-link); }
 
 /* ---------- header ---------- */
 .helpline { background: var(--sun-soft); border-bottom: 1px solid var(--line); font-size: var(--s-sm); }
@@ -118,7 +124,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .mainnav .sub a { padding: 7px 10px; border-radius: var(--r-sm); color: var(--ink); text-decoration: none; font-size: var(--s-sm); }
 .mainnav .sub a:hover { background: var(--mist); }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 20px; border-radius: 999px; font: inherit; font-weight: 500; text-decoration: none; border: 1.5px solid transparent; cursor: pointer; line-height: 1.3; }
-.btn-donate { background: var(--brand); color: var(--brand-ink); }
+.btn-donate { background: var(--give-bg); color: var(--brand-ink); }
 .btn-donate:hover { filter: brightness(1.08); }
 .btn-line { border-color: var(--ink); color: var(--ink); background: transparent; }
 .btn-line:hover { background: var(--mist); }
@@ -199,7 +205,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .habit { display: grid; gap: 8px; align-content: start; padding: 24px 20px 26px; text-decoration: none; color: var(--ink); border-right: 1px solid var(--line); position: relative; }
 .habit:last-child { border-right: 0; }
 .habit::before { content: ""; position: absolute; inset: 0 0 auto; height: 6px; background: var(--hc); }
-.habit .n { font-family: var(--f-num); font-weight: 600; font-size: var(--s-xs); color: var(--hc); letter-spacing: .1em; }
+.habit .n { font-family: var(--f-num); font-weight: 600; font-size: var(--s-xs); color: var(--ink-2); letter-spacing: .1em; display: inline-flex; align-items: center; gap: 6px; }
+.habit .n::before, .dot { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--hc); }
 .habit h3 { font-size: var(--s-lg); }
 .habit p { font-size: var(--s-sm); color: var(--ink-2); line-height: 1.65; }
 .habit:hover { background: var(--mist); }
@@ -223,7 +230,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .tag { display: inline-block; font-size: var(--s-xs); padding: 0 8px; border-radius: 4px; background: var(--mist-2); color: var(--ink-2); margin-right: 6px; vertical-align: 2px; }
 
 /* donate band */
-.give { background: var(--brand); color: var(--brand-ink); }
+.give { background: var(--give-bg); color: var(--brand-ink); }
 .give .wrap { padding-block: 48px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; }
 .give h2 { color: var(--brand-ink); }
 .give p { opacity: .92; margin-top: 10px; }
