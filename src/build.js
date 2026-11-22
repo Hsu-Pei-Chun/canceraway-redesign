@@ -325,7 +325,7 @@ function prevention() {
     if (h.key === 'p579') extra = `<p>${ext('https://canceraway579.canceraway.org.tw/index', '前往「蔬果彩虹579」專屬網站 ↗')}</p>`;
     const subs = (pg.items || []).filter(x => /pagelist\.php\?keyid=/.test(x.href)).slice(0, 8);
     const subList = subs.length ? `<h2>延伸閱讀</h2><ul>${subs.map(s => `<li>${ext(s.href, esc(s.text))}</li>`).join('')}</ul>` : '';
-    const body = pageHead({ prefix: p, crumbs: [['癌症預防', 'prevention/'], [h.title]], title: h.title, sub: h.short, meta: `<span style="color:var(--c${h.c});font-weight:600">● 防癌習慣 ${i + 1} / 5</span>` }) +
+    const body = pageHead({ prefix: p, crumbs: [['癌症預防', 'prevention/'], [h.title]], title: h.title, sub: h.short, meta: `<span class="h${h.c}c" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--ink-2)"><span class="dot" aria-hidden="true"></span>防癌習慣 ${i + 1} / 5</span>` }) +
       `<div class="wrap layout">${side(`${h.slug}.html`)}<article class="prose">${tidy(pg.html, p)}${extra}${subList}<p class="note">原始頁面：${ext(pg.srcUrl, '台灣癌症基金會・' + h.title)}</p></article></div>`;
     write(`prevention/${h.slug}.html`, layout({ title: `${h.title}｜台灣癌症基金會`, prefix: p, current: 'prevention/', body }), h.title);
   }

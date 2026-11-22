@@ -1,3 +1,5 @@
 node_modules/
 .DS_Store
 *.log
+tools/qa-out/
+tools/node_modules
