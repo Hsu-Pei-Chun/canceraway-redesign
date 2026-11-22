@@ -1,0 +1,356 @@
+{
+ "out": [
+  {
+   "top": "台灣常見癌症",
+   "href": "#",
+   "subs": [
+    "腦瘤 | cancerinfo.php?id=FD3596B7-8FF1-4E64-9ED2-89EE6DB0B336",
+    "喉癌 | cancerinfo.php?id=0125AF91-A66E-4F66-A8AB-D553592CD5B4",
+    "鼻咽癌 | cancerinfo.php?id=EFD1921A-2D32-4299-BC74-805912FB994C",
+    "口腔癌 | cancerinfo.php?id=D0052AC3-BE9A-46BC-B9F4-164FF14F3BF9",
+    "食道癌 | cancerinfo.php?id=EDB4D1DE-D91A-4833-A8F1-695CD3310C65",
+    "甲狀腺癌 | cancerinfo.php?id=ACF3F741-024F-425C-B3C4-9C4F83F3A34A",
+    "肺癌 | cancerinfo.php?id=BCD03185-BCBC-4CE2-A7E1-EBF798161CAA",
+    "乳癌 | cancerinfo.php?id=EC4BC652-18B3-464C-B19D-CB0C49C64285",
+    "胃癌 | cancerinfo.php?id=624DAB1F-5B43-433D-AA23-77AB3A90AC0D",
+    "腸胃道間質瘤 | cancerinfo.php?id=7E750EF3-B2B2-4F75-AD16-5DABB5C004E9",
+    "肝癌 | cancerinfo.php?id=080BA4E2-B4FA-4177-9C00-B7D224347130",
+    "膽囊膽管癌 | cancerinfo.php?id=1246ABD0-D2AC-41D4-AED3-1375EA8AB640",
+    "胰臟癌 | cancerinfo.php?id=EB0C9F56-5679-4647-9450-CCBD29435E10",
+    "大腸直腸癌 | cancerinfo.php?id=633D2D44-EC10-49BD-B7CF-E05EF6F7623A",
+    "攝護腺癌 | cancerinfo.php?id=B4202C4F-D7E6-4DF8-B5A3-A23947973BAF",
+    "卵巢癌 | cancerinfo.php?id=C2256245-D562-4AEE-A195-8DB1A1DA7EAA",
+    "輸卵管癌 | cancerinfo.php?id=81EF0741-6F67-45FD-B7AD-1CDF7997E0A6",
+    "子宮內膜癌 | cancerinfo.php?id=74E28B78-BC13-4AC0-AD00-47ABEC6F1972",
+    "子宮頸癌 | cancerinfo.php?id=DDE2E036-9595-4162-A872-5B27A1243C3F",
+    "陰道癌 | cancerinfo.php?id=6B7618FE-9EF2-4CC2-B4F3-513A00E5C8D1",
+    "腎臟癌 | cancerinfo.php?id=976EC61E-CC3E-4C25-A5A6-A44C490229A4",
+    "膀胱癌 | cancerinfo.php?id=9B3B7F46-B5BC-442E-A8BE-0176B544C6E4",
+    "皮膚癌 | cancerinfo.php?id=65F0883B-8992-4C2E-90B6-9262B32408F2",
+    "多發性骨髓瘤 | cancerinfo.php?id=F27F22C4-E6B1-47DE-A04B-D4908F4F1BE2",
+    "淋巴癌 | cancerinfo.php?id=CCAEC6A5-9CEF-4922-8010-D36DA898E905",
+    "急性骨髓性白血病 | cancerinfo.php?id=b759d08a-417e-6ae6-ca83-fe958e9c2f0a",
+    "慢性骨髓性白血病 | cancerinfo.php?id=c5b661c5-a238-8f79-8bff-da91597a6e49",
+    "急性淋巴性白血病 | cancerinfo.php?id=AD2E8345-BA5B-4FA8-A3DC-84A6478719AF",
+    "慢性淋巴性白血病 | cancerinfo.php?id=fe2af294-90f0-d535-0bc9-4c0db32b5818",
+    "骨癌 | cancerinfo.php?id=175A7FE8-2341-4CFF-8111-C8C1C4C39A04"
+   ]
+  },
+  {
+   "top": "癌症預防",
+   "href": "#",
+   "subs": [
+    "蔬果彩虹579 | catalog.php?keyid=50",
+    "規律運動 | catalog.php?keyid=51",
+    "體重控制 | catalog.php?keyid=52",
+    "遠離菸檳 | catalog.php?keyid=53",
+    "定期篩檢 | catalog.php?keyid=54",
+    "防癌小博士 | pagelist.php?keyid=292",
+    "預防活動資訊 | catalink.php?keyid=21",
+    "防癌小常識 | pagelist.php?keyid=55"
+   ]
+  },
+  {
+   "top": "癌症e學苑(癌友服務)",
+   "href": "#",
+   "subs": [
+    "自我照護管理 | #",
+    "醫療新知 | https://elearning.canceraway.org.tw/pagelist.php?keyid=239",
+    "癌症照護 | https://elearning.canceraway.org.tw/pagelist.php?keyid=240",
+    "癌症營養 | https://elearning.canceraway.org.tw/catalog.php?keyid=241",
+    "心理支持 | https://elearning.canceraway.org.tw/catalog.php?keyid=242",
+    "復健運動 | https://elearning.canceraway.org.tw/pagelist.php?keyid=81",
+    "免疫治療 | https://elearning.canceraway.org.tw/pagelist.php?keyid=280",
+    "身心靈康復課程 | #",
+    "北部課程 | classlist.php?keyid=95",
+    "南部課程 | classlist.php?keyid=96",
+    "跨院際講座 | classlist.php?keyid=126",
+    "病友支持團體 | #",
+    "肺腑之癌 | https://elearning.canceraway.org.tw/pagelist.php?keyid=45",
+    "腸相挺 | https://elearning.canceraway.org.tw/pagelist.php?keyid=44",
+    "笑顏逐開 | https://elearning.canceraway.org.tw/pagelist.php?keyid=46",
+    "悅聲合唱團 | https://elearning.canceraway.org.tw/pagelist.php?keyid=47",
+    "愛care之友 | https://elearning.canceraway.org.tw/pagelist.php?keyid=41",
+    "午茶話療 | https://elearning.canceraway.org.tw/pagelist.php?keyid=102",
+    "抗癌鬥士 | pagelist.php?keyid=103",
+    "癌症病友補助 | #",
+    "營養品補助 | https://elearning.canceraway.org.tw/pagelist.php?keyid=233",
+    "經濟補助 | https://elearning.canceraway.org.tw/pagelist.php?keyid=97",
+    "交通補助 | https://elearning.canceraway.org.tw/pagelist.php?keyid=101",
+    "居家喘息 | https://elearning.canceraway.org.tw/pagelist.php?keyid=234",
+    "心理諮商 | https://elearning.canceraway.org.tw/pagelist.php?keyid=98",
+    "癌症保險諮詢 | https://elearning.canceraway.org.tw/pagelist.php?keyid=278",
+    "假髮租借 | https://elearning.canceraway.org.tw/pagelist.php?keyid=99",
+    "專業諮詢服務 | https://elearning.canceraway.org.tw/pagelist.php?keyid=281",
+    "安心窩-遠距就醫服務 | https://elearning.canceraway.org.tw/pagelist.php?keyid=295",
+    "線上諮詢 | QA-index.php",
+    "數位教學平台 | https://elearning.canceraway.org.tw/catalog.php?keyid=198",
+    "直播小教室 | https://elearning.canceraway.org.tw/videolist.php?keyid=232",
+    "台灣藥物臨床試驗資訊 | https://www.taiwanclinicaltrials.tw/tw/news",
+    "癌友關懷教育中心 | https://www.canceraway.org.tw/catalog.php?keyid=12"
+   ]
+  },
+  {
+   "top": "自我照護管理",
+   "href": "#",
+   "subs": [
+    "醫療新知 | https://elearning.canceraway.org.tw/pagelist.php?keyid=239",
+    "癌症照護 | https://elearning.canceraway.org.tw/pagelist.php?keyid=240",
+    "癌症營養 | https://elearning.canceraway.org.tw/catalog.php?keyid=241",
+    "心理支持 | https://elearning.canceraway.org.tw/catalog.php?keyid=242",
+    "復健運動 | https://elearning.canceraway.org.tw/pagelist.php?keyid=81",
+    "免疫治療 | https://elearning.canceraway.org.tw/pagelist.php?keyid=280"
+   ]
+  },
+  {
+   "top": "身心靈康復課程",
+   "href": "#",
+   "subs": [
+    "北部課程 | classlist.php?keyid=95",
+    "南部課程 | classlist.php?keyid=96",
+    "跨院際講座 | classlist.php?keyid=126"
+   ]
+  },
+  {
+   "top": "病友支持團體",
+   "href": "#",
+   "subs": [
+    "肺腑之癌 | https://elearning.canceraway.org.tw/pagelist.php?keyid=45",
+    "腸相挺 | https://elearning.canceraway.org.tw/pagelist.php?keyid=44",
+    "笑顏逐開 | https://elearning.canceraway.org.tw/pagelist.php?keyid=46",
+    "悅聲合唱團 | https://elearning.canceraway.org.tw/pagelist.php?keyid=47",
+    "愛care之友 | https://elearning.canceraway.org.tw/pagelist.php?keyid=41",
+    "午茶話療 | https://elearning.canceraway.org.tw/pagelist.php?keyid=102",
+    "抗癌鬥士 | pagelist.php?keyid=103"
+   ]
+  },
+  {
+   "top": "癌症病友補助",
+   "href": "#",
+   "subs": [
+    "營養品補助 | https://elearning.canceraway.org.tw/pagelist.php?keyid=233",
+    "經濟補助 | https://elearning.canceraway.org.tw/pagelist.php?keyid=97",
+    "交通補助 | https://elearning.canceraway.org.tw/pagelist.php?keyid=101",
+    "居家喘息 | https://elearning.canceraway.org.tw/pagelist.php?keyid=234",
+    "心理諮商 | https://elearning.canceraway.org.tw/pagelist.php?keyid=98",
+    "癌症保險諮詢 | https://elearning.canceraway.org.tw/pagelist.php?keyid=278",
+    "假髮租借 | https://elearning.canceraway.org.tw/pagelist.php?keyid=99",
+    "專業諮詢服務 | https://elearning.canceraway.org.tw/pagelist.php?keyid=281",
+    "安心窩-遠距就醫服務 | https://elearning.canceraway.org.tw/pagelist.php?keyid=295"
+   ]
+  },
+  {
+   "top": "癌友權益促進",
+   "href": "#",
+   "subs": [
+    "最新消息 | pagelist.php?keyid=305"
+   ]
+  },
+  {
+   "top": "捐款與支持",
+   "href": "#",
+   "subs": [
+    "捐款方式 | donate.php",
+    "線上捐款 | donateform.php",
+    "捐款芳名錄 | pagelist.php?keyid=94",
+    "勸募專區 | pagelist.php?keyid=92",
+    "愛心義賣 | publish.php?keyid=93",
+    "志工招募 | pagelist.php?keyid=89",
+    "企業參與 | pagelist.php?keyid=88"
+   ]
+  },
+  {
+   "top": "台癌圖書館",
+   "href": "#",
+   "subs": [
+    "圖書出版 | publish.php?keyid=29",
+    "其他出版 | publish.php?keyid=31",
+    "會訊下載 | doclist.php?keyid=32",
+    "各項專業調查 | doclist.php?keyid=35",
+    "衛教手冊&懶人包 | doclist.php?keyid=294"
+   ]
+  },
+  {
+   "top": "關於基金會",
+   "href": "#",
+   "subs": [
+    "基金會緣起 | pagelist.php?keyid=18",
+    "宗旨與目標 | pagelist.php?keyid=22",
+    "服務項目 | pagelist.php?keyid=6",
+    "組織架構 | pagelist.php?keyid=23",
+    "最新消息 | pagelist.php?keyid=1",
+    "媒體報導 | pagelist.php?keyid=2",
+    "榮耀共享 | pagelist.php?keyid=26",
+    "年度報告 | doclist.php?keyid=125"
+   ]
+  },
+  {
+   "top": "台灣常見癌症",
+   "href": "javascript:;",
+   "subs": [
+    "腦瘤 | cancerinfo.php?id=FD3596B7-8FF1-4E64-9ED2-89EE6DB0B336",
+    "喉癌 | cancerinfo.php?id=0125AF91-A66E-4F66-A8AB-D553592CD5B4",
+    "鼻咽癌 | cancerinfo.php?id=EFD1921A-2D32-4299-BC74-805912FB994C",
+    "口腔癌 | cancerinfo.php?id=D0052AC3-BE9A-46BC-B9F4-164FF14F3BF9",
+    "食道癌 | cancerinfo.php?id=EDB4D1DE-D91A-4833-A8F1-695CD3310C65",
+    "肺癌 | cancerinfo.php?id=BCD03185-BCBC-4CE2-A7E1-EBF798161CAA",
+    "乳癌 | cancerinfo.php?id=EC4BC652-18B3-464C-B19D-CB0C49C64285",
+    "胃癌 | cancerinfo.php?id=624DAB1F-5B43-433D-AA23-77AB3A90AC0D",
+    "腸胃道間質瘤 | cancerinfo.php?id=7E750EF3-B2B2-4F75-AD16-5DABB5C004E9",
+    "肝癌 | cancerinfo.php?id=080BA4E2-B4FA-4177-9C00-B7D224347130",
+    "膽囊膽管癌 | cancerinfo.php?id=1246ABD0-D2AC-41D4-AED3-1375EA8AB640",
+    "胰臟癌 | cancerinfo.php?id=EB0C9F56-5679-4647-9450-CCBD29435E10",
+    "大腸直腸癌 | cancerinfo.php?id=633D2D44-EC10-49BD-B7CF-E05EF6F7623A",
+    "攝護腺癌 | cancerinfo.php?id=B4202C4F-D7E6-4DF8-B5A3-A23947973BAF",
+    "卵巢癌 | cancerinfo.php?id=C2256245-D562-4AEE-A195-8DB1A1DA7EAA",
+    "輸卵管癌 | cancerinfo.php?id=81EF0741-6F67-45FD-B7AD-1CDF7997E0A6",
+    "子宮內膜癌 | cancerinfo.php?id=74E28B78-BC13-4AC0-AD00-47ABEC6F1972",
+    "陰道癌 | cancerinfo.php?id=6B7618FE-9EF2-4CC2-B4F3-513A00E5C8D1",
+    "腎臟癌 | cancerinfo.php?id=976EC61E-CC3E-4C25-A5A6-A44C490229A4",
+    "膀胱癌 | cancerinfo.php?id=9B3B7F46-B5BC-442E-A8BE-0176B544C6E4",
+    "皮膚癌 | cancerinfo.php?id=65F0883B-8992-4C2E-90B6-9262B32408F2",
+    "多發性骨髓瘤 | cancerinfo.php?id=F27F22C4-E6B1-47DE-A04B-D4908F4F1BE2",
+    "淋巴癌 | cancerinfo.php?id=CCAEC6A5-9CEF-4922-8010-D36DA898E905",
+    "急性骨髓性白血病 | cancerinfo.php?id=b759d08a-417e-6ae6-ca83-fe958e9c2f0a",
+    "慢性骨髓性白血病 | cancerinfo.php?id=c5b661c5-a238-8f79-8bff-da91597a6e49",
+    "急性淋巴性白血病 | cancerinfo.php?id=AD2E8345-BA5B-4FA8-A3DC-84A6478719AF",
+    "慢性淋巴性白血病 | cancerinfo.php?id=fe2af294-90f0-d535-0bc9-4c0db32b5818",
+    "骨癌 | cancerinfo.php?id=175A7FE8-2341-4CFF-8111-C8C1C4C39A04"
+   ]
+  },
+  {
+   "top": "癌症預防",
+   "href": "javascript:;",
+   "subs": [
+    "蔬果彩虹579 | catalog.php?keyid=50",
+    "全民練5功 | catalog.php?keyid=291",
+    "規律運動 | catalog.php?keyid=51",
+    "體重控制 | catalog.php?keyid=52",
+    "遠離菸檳 | catalog.php?keyid=53",
+    "定期篩檢 | catalog.php?keyid=54",
+    "防癌小博士 | pagelist.php?keyid=292",
+    "預防活動資訊 | catalink.php?keyid=21",
+    "防癌小常識 | pagelist.php?keyid=55"
+   ]
+  },
+  {
+   "top": "全民練5功",
+   "href": "catalog.php?keyid=291",
+   "subs": [
+    "規律運動 | catalog.php?keyid=51",
+    "體重控制 | catalog.php?keyid=52",
+    "遠離菸檳 | catalog.php?keyid=53",
+    "定期篩檢 | catalog.php?keyid=54",
+    "防癌小博士 | pagelist.php?keyid=292"
+   ]
+  },
+  {
+   "top": "癌友服務",
+   "href": "javascript:;",
+   "subs": [
+    "醫療新知 | https://elearning.canceraway.org.tw/pagelist.php?keyid=239",
+    "癌症照護 | https://elearning.canceraway.org.tw/pagelist.php?keyid=240",
+    "癌症營養 | https://elearning.canceraway.org.tw/catalog.php?keyid=241",
+    "心理支持 | https://elearning.canceraway.org.tw/catalog.php?keyid=242",
+    "復健運動 | https://elearning.canceraway.org.tw/pagelist.php?keyid=81",
+    "免疫治療 | https://elearning.canceraway.org.tw/pagelist.php?keyid=280",
+    "北部課程 | classlist.php?keyid=95",
+    "南部課程 | classlist.php?keyid=96",
+    "跨院際講座 | classlist.php?keyid=126",
+    "肺腑之癌 | https://elearning.canceraway.org.tw/pagelist.php?keyid=45",
+    "腸相挺 | https://elearning.canceraway.org.tw/pagelist.php?keyid=44",
+    "笑顏逐開 | https://elearning.canceraway.org.tw/pagelist.php?keyid=46",
+    "悅聲合唱團 | https://elearning.canceraway.org.tw/pagelist.php?keyid=47",
+    "愛care之友 | https://elearning.canceraway.org.tw/pagelist.php?keyid=41",
+    "午茶話療 | https://elearning.canceraway.org.tw/pagelist.php?keyid=102",
+    "抗癌鬥士 | pagelist.php?keyid=103",
+    "營養品補助 | https://elearning.canceraway.org.tw/pagelist.php?keyid=233",
+    "經濟補助 | https://elearning.canceraway.org.tw/pagelist.php?keyid=97",
+    "交通補助 | https://elearning.canceraway.org.tw/pagelist.php?keyid=101",
+    "居家喘息 | https://elearning.canceraway.org.tw/pagelist.php?keyid=234",
+    "心理諮商 | https://elearning.canceraway.org.tw/pagelist.php?keyid=98",
+    "癌症保險諮詢 | https://elearning.canceraway.org.tw/pagelist.php?keyid=278",
+    "假髮租借 | https://elearning.canceraway.org.tw/pagelist.php?keyid=99",
+    "專業諮詢服務 | https://elearning.canceraway.org.tw/pagelist.php?keyid=281",
+    "安心窩-遠距就醫服務 | https://elearning.canceraway.org.tw/pagelist.php?keyid=295",
+    "線上諮詢 | QA-index.php",
+    "數位教學平台 | https://elearning.canceraway.org.tw/catalog.php?keyid=198",
+    "直播小教室 | https://elearning.canceraway.org.tw/videolist.php?keyid=232",
+    "台灣藥物臨床試驗資訊 | https://www.taiwanclinicaltrials.tw/tw/news",
+    "癌友關懷教育中心 | catalog.php?keyid=12"
+   ]
+  },
+  {
+   "top": "癌友權益促進",
+   "href": "javascript:;",
+   "subs": [
+    "最新消息 | pagelist.php?keyid=305"
+   ]
+  },
+  {
+   "top": "捐款與支持",
+   "href": "javascript:;",
+   "subs": [
+    "捐款方式 | donate.php",
+    "線上捐款 | donateform.php",
+    "捐款芳名錄 | pagelist.php?keyid=94",
+    "勸募專區 | pagelist.php?keyid=92",
+    "愛心義賣 | publish.php?keyid=93",
+    "支持我們 | #",
+    "志工招募 | pagelist.php?keyid=89",
+    "企業參與 | pagelist.php?keyid=88"
+   ]
+  },
+  {
+   "top": "支持我們",
+   "href": "#",
+   "subs": [
+    "志工招募 | pagelist.php?keyid=89",
+    "企業參與 | pagelist.php?keyid=88"
+   ]
+  },
+  {
+   "top": "台癌圖書館",
+   "href": "javascript:;",
+   "subs": [
+    "圖書出版 | publish.php?keyid=29",
+    "其他出版 | publish.php?keyid=31",
+    "會訊下載 | doclist.php?keyid=32",
+    "各項專業調查 | doclist.php?keyid=35",
+    "衛教手冊&懶人包 | doclist.php?keyid=294"
+   ]
+  },
+  {
+   "top": "關於基金會",
+   "href": "javascript:;",
+   "subs": [
+    "基金會介紹 | #",
+    "基金會緣起 | pagelist.php?keyid=18",
+    "宗旨與目標 | pagelist.php?keyid=22",
+    "服務項目 | pagelist.php?keyid=6",
+    "組織架構 | pagelist.php?keyid=23",
+    "最新消息 | pagelist.php?keyid=1",
+    "媒體報導 | pagelist.php?keyid=2",
+    "榮耀共享 | pagelist.php?keyid=26",
+    "年度報告 | doclist.php?keyid=125"
+   ]
+  },
+  {
+   "top": "基金會介紹",
+   "href": "#",
+   "subs": [
+    "基金會緣起 | pagelist.php?keyid=18",
+    "宗旨與目標 | pagelist.php?keyid=22",
+    "服務項目 | pagelist.php?keyid=6",
+    "組織架構 | pagelist.php?keyid=23"
+   ]
+  }
+ ],
+ "foot": [
+  "首頁 | /",
+  "關於基金會 | pagelist.php?keyid=18",
+  "網站服務條款 | pagelist.php?keyid=235",
+  "線上聯絡 | QA-index.php"
+ ],
+ "footText": "訂閱電子報 獲得最新癌症資訊與活動訊息 版權所有 財團法人台灣癌症基金會 行政院衛生署醫字第86033641號"
+}
