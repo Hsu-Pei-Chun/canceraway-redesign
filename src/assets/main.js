@@ -74,6 +74,70 @@
       });
     });
     if (q) q.addEventListener('input', apply);
+    // arriving as cancer/index.html#digest → show that body system
+    var fromHash = function () {
+      var h = decodeURIComponent(location.hash.slice(1));
+      var chip = h && document.querySelector('.chip[data-f="' + h + '"]');
+      if (!chip) return;
+      chip.click();
+      var target = document.getElementById(h) || grid;
+      var go = function () { target.scrollIntoView({ block: 'start', behavior: 'instant' }); };
+      go();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
+      window.addEventListener('load', go, { once: true });
+    };
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
+  }
+
+  // keep #anchors clear of the sticky header: expose its height to CSS
+  var setHeadH = function () {
+    if (header) document.documentElement.style.setProperty('--head-h', header.getBoundingClientRect().height + 'px');
+  };
+  setHeadH();
+  window.addEventListener('resize', setHeadH);
+  // Web fonts arrive after the browser's first jump to #section and shift the layout,
+  // so re-align to the target once fonts and images have settled.
+  var realign = function () {
+    setHeadH();
+    var id = decodeURIComponent(location.hash.slice(1));
+    var t = id && id !== 'main' && document.getElementById(id);
+    if (t && !(grid && document.querySelector('.chip[data-f="' + id + '"]'))) t.scrollIntoView({ block: 'start', behavior: 'instant' });
+  };
+  if (location.hash) {
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(realign);
+    window.addEventListener('load', realign);
+    // for the first few seconds, if the header changes height (fonts, compact mode),
+    // re-align — unless the reader has already started scrolling on their own
+    var userMoved = false, started = Date.now();
+    ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) { window.addEventListener(ev, function () { userMoved = true; }, { once: true, passive: true }); });
+    if (window.ResizeObserver && header) new ResizeObserver(function () {
+      if (!userMoved && Date.now() - started < 3000) realign();
+    }).observe(header);
+  } else if (document.fonts && document.fonts.ready) document.fonts.ready.then(setHeadH);
+
+  // side menu scroll-spy: mark the section currently being read
+  var spyLinks = [].slice.call(document.querySelectorAll('.side nav a[data-spy]'));
+  if (spyLinks.length) {
+    var spy = function () {
+      var line = (header ? header.getBoundingClientRect().bottom : 0) + 40;
+      var current = spyLinks[0];
+      spyLinks.forEach(function (a) {
+        var t = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+        if (t && t.getBoundingClientRect().top <= line) current = a;
+      });
+      // at the very bottom, the last section is the one being read
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = spyLinks[spyLinks.length - 1];
+      spyLinks.forEach(function (a) {
+        var on = a === current;
+        a.classList.toggle('on', on);
+        if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+      });
+    };
+    spy();
+    window.addEventListener('scroll', spy, { passive: true });
+    window.addEventListener('resize', spy);
+    window.addEventListener('hashchange', function () { setTimeout(spy, 50); });
   }
 
   // newsletter (proposal only — not connected)

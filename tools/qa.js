@@ -172,7 +172,8 @@ const INSPECT = () => {
     await p.goto(BASE + rel, { waitUntil: 'networkidle', timeout: 60000 });
     for (let w = 320; w <= 1600; w += 20) {
       await p.setViewportSize({ width: w, height: 900 });
-      await p.waitForTimeout(30);
+      // measure what the reader sees: after the browser has run resize handlers and painted
+      await p.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
       const r = await p.evaluate(INSPECT);
       const probs = r.issues.filter(i => ['page-hscroll', 'overflow-x', 'wrapped', 'header', 'clipped', 'overlap'].includes(i.type)).map(i => i.detail);
       probs.forEach(d => report.sweep.push({ page: rel, font: fsz, width: w, detail: d }));
@@ -211,17 +212,42 @@ const INSPECT = () => {
     await m.tap('.menu-toggle');
     if (await m.isVisible('#mainnav')) throw new Error('再點一次沒關起來');
   });
-  await it('手機：點「消化道」只剩 7 種癌症', async () => {
-    await m.tap('.chip[data-f="digest"]');
-    const n = await m.$$eval('#cancer-grid .cancer', els => els.filter(e => !e.hidden).length);
-    if (n !== 7) throw new Error(`顯示 ${n} 個`);
-    await m.tap('.chip[data-f="all"]');
-  });
-  await it('手機：篩選輸入「肝」找到肝癌', async () => {
+  // count what is actually visible on screen, not what the script marked hidden
+  const visibleCards = pg => pg.$$eval('#cancer-grid .cancer', els => els.filter(e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== 'hidden'; }).map(e => ({ name: e.querySelector('b').textContent, sys: e.dataset.sys, top: e.dataset.top })));
+  for (const [label, url] of [['首頁', ''], ['認識癌症頁', 'cancer/index.html']]) {
+    for (const [vpName, vp] of [['手機', { width: 390, height: 844 }], ['電腦', { width: 1366, height: 900 }]]) {
+      await it(`${vpName}・${label}：每個部位篩選按鈕都只顯示該部位的癌症`, async () => {
+        const c = await browser.newContext({ viewport: vp, isMobile: vp.width < 600, hasTouch: vp.width < 600 });
+        const pg = await c.newPage();
+        await pg.goto(BASE + url, { waitUntil: 'networkidle' });
+        const all = await visibleCards(pg);
+        if (all.length !== 30) throw new Error(`一開始顯示 ${all.length} 種，應該是 30`);
+        const chips = await pg.$$eval('.chip', cs => cs.map(c => ({ f: c.dataset.f, t: c.textContent.trim() })));
+        const bad = [];
+        for (const ch of chips) {
+          await pg.click(`.chip[data-f="${ch.f}"]`);
+          await pg.waitForTimeout(150);
+          const vis = await visibleCards(pg);
+          const expect = ch.f === 'all' ? all : all.filter(x => ch.f === 'top' ? x.top === '1' : x.sys === ch.f);
+          const wrong = vis.filter(x => !expect.some(e => e.name === x.name));
+          if (vis.length !== expect.length || wrong.length) bad.push(`「${ch.t}」顯示 ${vis.length} 種（應為 ${expect.length}）${wrong.length ? '，多出：' + wrong.slice(0, 3).map(w => w.name).join('、') : ''}`);
+          const pressed = await pg.getAttribute(`.chip[data-f="${ch.f}"]`, 'aria-pressed');
+          if (pressed !== 'true') bad.push(`「${ch.t}」點了沒有變成選取狀態`);
+        }
+        await pg.click('.chip[data-f="skin"]');
+        await pg.screenshot({ path: path.join(OUT, `interaction-filter-${url ? 'cancer' : 'home'}-${vp.width}.png`) });
+        await c.close();
+        if (bad.length) throw new Error(bad.join('；'));
+      });
+    }
+  }
+  await it('手機：篩選輸入「肝」只看得到肝癌', async () => {
+    await m.click('.chip[data-f="all"]');
     await m.fill('.finder-q', '肝');
-    const names = await m.$$eval('#cancer-grid .cancer', els => els.filter(e => !e.hidden).map(e => e.querySelector('b').textContent));
-    if (!names.includes('肝癌')) throw new Error('結果：' + names.join(','));
+    const names = (await visibleCards(m)).map(x => x.name);
+    if (names.length !== 1 || names[0] !== '肝癌') throw new Error('畫面上看到：' + names.join(','));
     await m.fill('.finder-q', 'zzzz');
+    if ((await visibleCards(m)).length) throw new Error('沒結果時還看得到卡片');
     if (!(await m.isVisible('#finder-empty'))) throw new Error('沒結果時沒顯示提示');
     await m.fill('.finder-q', '');
   });
