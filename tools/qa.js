@@ -16,7 +16,31 @@ const pages = [];
   }
 })(path.join(__dirname, '..', 'docs'), '');
 
-const VIEWPORTS = [['desktop', 1366, 900], ['tablet', 768, 1024], ['mobile', 390, 844], ['small', 360, 740], ['desktop-dark', 1366, 900, 'dark'], ['mobile-dark', 390, 844, 'dark']];
+// [name, width, height, colour scheme, Chrome default font size (px)]
+// 16 = Chrome「中」(default), 20 =「大」, 24 =「特大」
+const VIEWPORTS = [
+  ['desktop', 1366, 900], ['tablet', 768, 1024], ['mobile', 390, 844], ['small', 360, 740],
+  ['desktop-dark', 1366, 900, 'dark'], ['mobile-dark', 390, 844, 'dark'],
+  ['desktop-font20', 1366, 900, 'light', 20], ['laptop-font20', 1180, 800, 'light', 20],
+  ['mobile-font20', 393, 852, 'light', 20], ['mobile-font24', 393, 852, 'light', 24],
+];
+const os = require('os');
+// A real Chrome profile whose 「字型大小」 preference is set, like changing it in chrome://settings.
+// Runs in its own headless browser, so it never touches the user's own Chrome window.
+async function makeContext(browser, { width, height, scheme = 'light', font = 16 }) {
+  const opts = { viewport: { width, height }, isMobile: width < 600, hasTouch: width < 600, colorScheme: scheme };
+  if (font === 16) return browser.newContext(opts);
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'qa-font-'));
+  fs.mkdirSync(path.join(dir, 'Default'));
+  fs.writeFileSync(path.join(dir, 'Default', 'Preferences'), JSON.stringify({ webkit: { webprefs: { default_font_size: font } } }));
+  const ctx = await chromium.launchPersistentContext(dir, { channel: 'chromium', ...opts });
+  const check = await ctx.newPage();
+  await check.setContent('<p>x</p>');
+  const got = await check.evaluate(() => getComputedStyle(document.documentElement).fontSize);
+  await check.close();
+  if (got !== font + 'px') throw new Error(`字型大小設定沒有生效：要 ${font}px，實際 ${got}`);
+  return ctx;
+}
 
 // runs in page: find layout problems
 const INSPECT = () => {
@@ -40,7 +64,9 @@ const INSPECT = () => {
     if ((r.right > W + 1 || r.left < -1) && !inScroller(el) && cs.position !== 'fixed' && !el.classList.contains('skip') && !el.closest('.sr-only'))
       issues.push({ type: 'overflow-x', detail: `${name(el)} 超出螢幕 (left ${Math.round(r.left)}, right ${Math.round(r.right)})` });
     // text clipped inside its own box
-    if ((cs.overflow === 'hidden' || cs.overflowX === 'hidden' || cs.textOverflow === 'ellipsis') && el.scrollWidth > el.clientWidth + 2 && el.innerText && !el.closest('.sr-only') && !el.classList.contains('band579'))
+    // visually-hidden screen-reader text (1×1px, clipped) is intentional, not clipped content
+    const srOnly = r.width <= 1 && r.height <= 1;
+    if (!srOnly && (cs.overflow === 'hidden' || cs.overflowX === 'hidden' || cs.textOverflow === 'ellipsis') && el.scrollWidth > el.clientWidth + 2 && el.innerText && !el.closest('.sr-only') && !el.classList.contains('band579'))
       issues.push({ type: 'clipped', detail: `${name(el)} 文字被裁切 (${el.scrollWidth} > ${el.clientWidth})` });
   }
   // overlapping interactive elements (buttons/links on top of each other)
@@ -73,6 +99,24 @@ const INSPECT = () => {
     const need = size >= 24 || (size >= 18.66 && bold) ? 3 : 4.5;
     if (ratio < need) { const k = el.tagName + el.className + cs.color; if (seenTxt.has(k)) continue; seenTxt.add(k); issues.push({ type: 'contrast', detail: `${name(el)} 對比 ${ratio.toFixed(2)}（需要 ${need}）` }); }
   }
+  // short labels (buttons, menu items) squeezed onto several lines
+  document.querySelectorAll('.site-header a, .site-header button, .btn, .chip, .toc a, .quick a, .brand-name b').forEach(el => {
+    if (!el.offsetParent) return;
+    const cs = getComputedStyle(el);
+    const lh = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.3;
+    const h = el.getBoundingClientRect().height - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    const t = el.innerText.trim();
+    if (t && t.length <= 12 && h > lh * 1.5) issues.push({ type: 'wrapped', detail: `${name(el)} 被擠成 ${Math.round(h / lh)} 行` });
+  });
+  // header: either full menu on one row, or logo + donate + menu button on one row
+  const nav = document.getElementById('mainnav'), tog = document.querySelector('.menu-toggle'), bar = document.querySelector('.site-header .bar');
+  if (nav && tog && bar) {
+    const navShown = getComputedStyle(nav).display !== 'none', togShown = getComputedStyle(tog).display !== 'none';
+    if (navShown && togShown && !nav.classList.contains('open')) issues.push({ type: 'header', detail: '完整選單和「選單」按鈕同時出現' });
+    if (!navShown && !togShown) issues.push({ type: 'header', detail: '主選單和「選單」按鈕都看不到' });
+    const row = [bar.querySelector('.brand'), bar.querySelector('.btn-donate'), togShown ? tog : nav].filter(Boolean).map(e => { const r = e.getBoundingClientRect(); return r.top + r.height / 2; });
+    if (Math.max(...row) - Math.min(...row) > 8) issues.push({ type: 'header', detail: togShown ? 'Logo、捐款、選單按鈕沒有在同一排' : '完整選單折成兩排' });
+  }
   // fonts
   const fontsOk = document.fonts.check('16px "Noto Sans TC"');
   if (!fontsOk) issues.push({ type: 'font', detail: 'Noto Sans TC 沒載入' });
@@ -84,8 +128,8 @@ const INSPECT = () => {
   const browser = await chromium.launch();
   const report = { base: BASE, pages: pages.length, results: [], links: {}, interactions: [] };
   const allLinks = new Set();
-  for (const [vp, w, h, scheme] of VIEWPORTS) {
-    const ctx = await browser.newContext({ viewport: { width: w, height: h }, isMobile: w < 600, hasTouch: w < 600, colorScheme: scheme || 'light' });
+  for (const [vp, w, h, scheme, font] of VIEWPORTS) {
+    const ctx = await makeContext(browser, { width: w, height: h, scheme, font });
     let i = 0;
     const queue = [...pages];
     await Promise.all([0, 1, 2, 3, 4, 5].map(async () => {
@@ -104,7 +148,7 @@ const INSPECT = () => {
         if (!resp || resp.status() !== 200) issues.push({ type: 'http', detail: `狀態碼 ${resp && resp.status()}` });
         if (issues.length) {
           const shot = `${vp}-${rel.replace(/[\/.]/g, '_')}.png`;
-          await p.screenshot({ path: path.join(OUT, shot), fullPage: true });
+          await p.screenshot({ path: path.join(OUT, shot), fullPage: true }).catch(() => p.screenshot({ path: path.join(OUT, shot) })).catch(() => {});
           report.results.push({ vp, page: rel, issues, shot });
         }
         await p.close();
@@ -114,6 +158,34 @@ const INSPECT = () => {
     console.log(`${vp} (${w}px): ${pages.length} 頁檢查完，${report.results.filter(x => x.vp === vp).length} 頁有問題`);
     await ctx.close();
   }
+
+  // width sweep: every 20px from 320 to 1600, at four Chrome font-size settings.
+  // Catches layouts that only break between the fixed viewports above, and
+  // short labels (buttons, menu items) squeezed onto several lines.
+  const SWEEP_PAGES = ['index.html', 'cancer/lung.html', 'give/index.html', 'news/5274.html', 'prevention/screening.html', 'sitemap.html'];
+  const FONT_SIZES = [16, 18, 20, 24];
+  report.sweep = [];
+  for (const fsz of FONT_SIZES) {
+  const sctx = await makeContext(browser, { width: 1366, height: 900, font: fsz });
+  for (const rel of SWEEP_PAGES) {
+    const p = await sctx.newPage();
+    await p.goto(BASE + rel, { waitUntil: 'networkidle', timeout: 60000 });
+    for (let w = 320; w <= 1600; w += 20) {
+      await p.setViewportSize({ width: w, height: 900 });
+      await p.waitForTimeout(30);
+      const r = await p.evaluate(INSPECT);
+      const probs = r.issues.filter(i => ['page-hscroll', 'overflow-x', 'wrapped', 'header', 'clipped', 'overlap'].includes(i.type)).map(i => i.detail);
+      probs.forEach(d => report.sweep.push({ page: rel, font: fsz, width: w, detail: d }));
+    }
+    await p.close();
+  }
+  await sctx.close();
+  }
+  // group consecutive widths for a readable summary
+  const grouped = {};
+  report.sweep.forEach(s => { const k = `${s.page} 字型${s.font}px：${s.detail}`; (grouped[k] = grouped[k] || []).push(s.width); });
+  console.log(`寬度掃描（${SWEEP_PAGES.length} 頁 × ${FONT_SIZES.length} 種字型 × 65 種寬度）：${Object.keys(grouped).length ? '' : '0 個問題'}`);
+  Object.entries(grouped).forEach(([k, ws]) => console.log(`  ✗ ${k}（寬 ${Math.min(...ws)}–${Math.max(...ws)}px）`));
 
   // internal link check
   const rq = await browser.newContext();

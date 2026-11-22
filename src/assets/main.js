@@ -8,8 +8,41 @@
   if (tog && nav) tog.addEventListener('click', function () {
     var open = nav.classList.toggle('open');
     tog.setAttribute('aria-expanded', open ? 'true' : 'false');
-    tog.textContent = open ? '關閉' : '選單';
+    tog.querySelector('.tg-label').textContent = open ? '關閉' : '選單';
+    tog.querySelector('.tg-icon').textContent = open ? '✕' : '☰';
+    tog.setAttribute('aria-label', open ? '關閉選單' : '選單');
+    if (!open) fitHeader();
   });
+
+  // switch the header to its compact (menu button) form whenever the full menu
+  // doesn't fit on one row — this follows font size and zoom, not a fixed width
+  var header = document.querySelector('.site-header');
+  var bar = header && header.querySelector('.bar');
+  function fitHeader() {
+    if (!bar || !nav) return;
+    if (nav.classList.contains('open')) return;
+    header.classList.remove('compact', 'tight', 'tighter', 'tightest');
+    var brand = bar.querySelector('.brand'), give = bar.querySelector('.btn-donate');
+    var room = function () { var cs = getComputedStyle(bar); return bar.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight); };
+    var gap = function () { return parseFloat(getComputedStyle(bar).columnGap) || 10; };
+    // 1) full menu on one row? otherwise switch to the menu button
+    if (getComputedStyle(tog).display === 'none') {
+      if (brand.offsetWidth + nav.scrollWidth + give.offsetWidth + gap() * 2 > room()) header.classList.add('compact');
+    }
+    // 2) compact row (logo + donate + menu button) on one row? otherwise step down:
+    //    short donate label → icon-only menu button → logo without its name
+    if (getComputedStyle(tog).display !== 'none') {
+      var steps = ['tight', 'tighter', 'tightest'];
+      for (var i = 0; i < steps.length; i++) {
+        if (brand.offsetWidth + give.offsetWidth + tog.offsetWidth + gap() * 2 <= room()) break;
+        header.classList.add(steps[i]);
+      }
+    }
+  }
+  fitHeader();
+  window.addEventListener('resize', fitHeader);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHeader);
+  if (window.ResizeObserver && bar) new ResizeObserver(function () { fitHeader(); }).observe(document.documentElement);
 
   // cancer finder: text filter + body-system chips
   var grid = document.getElementById('cancer-grid');
