@@ -175,7 +175,12 @@ function pageHead({ prefix, crumbs, title, en, sub, meta }) {
 </div></section>`;
 }
 const helpCard = `<div class="help"><span class="eyebrow">需要協助？</span><b class="num">02-8787-3881</b><span>護理師、營養師、社工師免費諮詢</span></div>`;
-const sideNav = (title, items, here) => `<div><h2>${title}</h2><nav>${items.map(([t, h]) => `<a href="${h}"${h === here ? ' aria-current="page"' : ''}>${esc(t)}</a>`).join('')}</nav></div>`;
+// side menu: links to other sites open in a new tab (marked ↗); #section links get scroll-spy in main.js
+const sideNav = (title, items, here) => `<div><h2>${title}</h2><nav>${items.map(([t, h]) => {
+  const external = /^https?:/.test(h);
+  const label = esc(t) + (external && !/↗/.test(t) ? ' ↗' : '');
+  return `<a href="${h}"${h === here ? ' aria-current="page"' : ''}${external ? ' target="_blank" rel="noopener"' : ''}${h.startsWith('#') ? ' data-spy' : ''}>${label}</a>`;
+}).join('')}</nav></div>`;
 
 /* ---------------------------------------------------------- writers */
 const pagesOut = [];
@@ -279,7 +284,7 @@ function finderControls(id) {
 /* cancers */
 function cancerPages() {
   const p = '../';
-  const grouped = SYSTEMS.map(s => `<div><h2 style="font-size:var(--s-lg);margin-bottom:12px">${s[1]}</h2><div class="cancer-grid">${cancers.filter(c => c.sys[0] === s[0]).map(c => `<a class="cancer" href="${c.slug}.html" data-sys="${c.sys[0]}" data-top="${c.top10 ? 1 : 0}" data-q="${esc(c.name + ' ' + c.en)}"><b>${esc(c.name)}</b><small>${esc(c.en)}</small>${c.top10 ? '<span class="rank">十大癌症</span>' : ''}</a>`).join('')}</div></div>`).join('');
+  const grouped = SYSTEMS.map(s => `<div id="${s[0]}" class="cancer-group"><h2 style="font-size:var(--s-lg);margin-bottom:12px">${s[1]}</h2><div class="cancer-grid">${cancers.filter(c => c.sys[0] === s[0]).map(c => `<a class="cancer" href="${c.slug}.html" data-sys="${c.sys[0]}" data-top="${c.top10 ? 1 : 0}" data-q="${esc(c.name + ' ' + c.en)}"><b>${esc(c.name)}</b><small>${esc(c.en)}</small>${c.top10 ? '<span class="rank">十大癌症</span>' : ''}</a>`).join('')}</div></div>`).join('');
   const idx = pageHead({ prefix: p, crumbs: [['認識癌症']], title: '認識癌症', sub: '依身體部位整理的 30 種常見癌症。每一頁都包含背景成因、臨床症狀、相關檢查、癌症分期與治療方式。' }) +
     `<div class="wrap section" style="display:grid;gap:36px">${finderControls('idx')}<div id="cancer-grid" style="display:grid;gap:36px">${grouped}</div><p class="finder-empty" id="finder-empty" hidden>找不到符合的癌症，試試其他關鍵字。</p>
     <p class="note">這些內容是衛教參考，不能取代醫師的診斷。治療決定請和你的醫療團隊討論；有疑問可撥 02-8787-3881。</p></div>`;
@@ -293,7 +298,7 @@ function cancerPages() {
       prefix: p, crumbs: [['認識癌症', 'cancer/'], [c.sys[1]]], title: c.zh, en: c.en,
       meta: `<span>部位：${c.sys[1]}</span>${c.top10 ? '<span>台灣十大癌症</span>' : ''}${c.updated ? `<span>內容更新：<span class="num">${c.updated}</span></span>` : ''}`,
     }) + `<div class="wrap layout">
-  <aside class="side">${sideNav('同部位癌症', same, `${c.slug}.html`)}${helpCard}<div><h2>其他部位</h2><nav>${SYSTEMS.filter(s => s[0] !== c.sys[0]).map(s => `<a href="index.html">${s[1]}</a>`).join('')}</nav></div></aside>
+  <aside class="side">${sideNav('同部位癌症', same, `${c.slug}.html`)}${helpCard}<div><h2>其他部位</h2><nav>${SYSTEMS.filter(s => s[0] !== c.sys[0]).map(s => `<a href="index.html#${s[0]}">${s[1]}</a>`).join('')}</nav></div></aside>
   <article class="prose">
     ${toc}
     ${c.intro ? `<div class="prose">${tidy(c.intro, p)}</div>` : ''}

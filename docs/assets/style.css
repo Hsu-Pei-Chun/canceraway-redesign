@@ -69,6 +69,10 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+/* the hidden attribute must win over component display rules (e.g. .cancer { display: grid }) */
+[hidden] { display: none !important; }
+/* jumping to #section stops just below the sticky header (height set by main.js) */
+[id] { scroll-margin-top: calc(var(--head-h, 72px) + 16px); }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
 body {
@@ -288,7 +292,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 }
 
 .prose { max-width: var(--read); display: grid; gap: 1.1em; }
-.prose h2 { font-size: var(--s-xl); margin-top: 1.4em; padding-top: 1em; border-top: 1px solid var(--line); scroll-margin-top: 100px; }
+.prose h2 { font-size: var(--s-xl); margin-top: 1.4em; padding-top: 1em; border-top: 1px solid var(--line); }
 .prose h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
 .prose h3 { font-size: var(--s-lg); margin-top: .6em; }
 .prose ul, .prose ol { margin: 0; padding-left: 1.4em; display: grid; gap: .35em; }
