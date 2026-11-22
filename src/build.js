@@ -117,6 +117,7 @@ function layout({ title, desc, prefix, current, body }) {
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600&family=Huninn&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="${prefix}assets/style.css">
+<link rel="icon" href="${prefix}assets/favicon.svg" type="image/svg+xml">
 </head>
 <body data-root="${prefix}">
 <a class="skip" href="#main">跳到主要內容</a>
@@ -128,9 +129,9 @@ function layout({ title, desc, prefix, current, body }) {
 <header class="site-header">
   <div class="wrap bar">
     <a class="brand" href="${prefix}index.html">${brandMark}<span class="brand-name"><b>台灣癌症基金會</b><small>FORMOSA CANCER FOUNDATION</small></span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mainnav">選單</button>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mainnav" aria-label="選單"><span class="tg-icon" aria-hidden="true">☰</span><span class="tg-label">選單</span></button>
     <nav class="mainnav" id="mainnav" aria-label="主選單">${nav}</nav>
-    <a class="btn btn-donate" href="${prefix}give/">捐款支持</a>
+    <a class="btn btn-donate" href="${prefix}give/" aria-label="捐款支持"><span class="long">捐款支持</span><span class="short" aria-hidden="true">捐款</span></a>
   </div>
   <div class="band579" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
 </header>
@@ -193,7 +194,7 @@ function home() {
 <section class="hero"><div class="wrap">
   <div>
     <p class="eyebrow">台灣癌症基金會 · 1997 年成立</p>
-    <h1>癌症可以預防，<span>你也不必一個人面對。</span></h1>
+    <h1>癌症可以預防，<span>你也不必<wbr>一個人面對。</span></h1>
     <p class="lede">從防癌飲食、免費篩檢，到治療期間的營養、補助與心理支持，我們把可靠的資訊和實際的幫忙放在同一個地方。</p>
     <form class="hero-search" action="search.html" role="search">
       <label class="sr-only" for="q">搜尋</label>
@@ -496,7 +497,7 @@ function searchIndex() {
 /* ---------------------------------------------------------- run */
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
-for (const f of ['style.css', 'main.js']) fs.copyFileSync(path.join(__dirname, 'assets', f), path.join(OUT, 'assets', f));
+for (const f of ['style.css', 'main.js', 'favicon.svg']) fs.copyFileSync(path.join(__dirname, 'assets', f), path.join(OUT, 'assets', f));
 home(); cancerPages(); prevention(); care(); rights(); give(); library(); newsPages(); about(); misc(); searchIndex();
 const oldMap = require('./old-map.js')(cancers);
 sitemapPage(oldMap);
